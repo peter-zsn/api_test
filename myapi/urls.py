@@ -19,7 +19,7 @@ from django.conf import settings
 
 
 urlpatterns = [
-    url(r'^site_media/(?P<path>.*)$', serve, {'document_root': settings.STATIC_SITE})  # 静态文件路径
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.STATIC_SITE})  # 静态文件路径
 ]
 
 urlpatterns += [
