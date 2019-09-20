@@ -3,6 +3,7 @@ import json as simplejson
 from json.encoder import JSONEncoder
 import datetime
 from django.http import HttpResponse
+from django.template import loader
 
 
 class XJSONEncoder(JSONEncoder):
@@ -31,3 +32,9 @@ def ajax_ok(data=None, message=""):
 def ajax_fail(data=None, message=""):
     res = dict(data=data, message=message, response='fail')
     return json_response(res)
+
+# 返回模板数据
+def rendet_template(request, path, data=None):
+    t = loader.get_template(path)
+    s = t.render(data, request)
+    return HttpResponse(s)

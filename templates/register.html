@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="/site_media/js/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+     <div class="main">
+         <span class="title">莫名其妙注册页面</span></br>
+         <span class="login_user">账号：</span>
+         <input value="请输入账号" id="name" onfocus="value=''" onblur="if(!value) value=defaultValue"><br/>
+         <span class="login_pass">密码：</span>
+         <input value="请输入密码" id="pass" onfocus="value=''" onblur="if(!value) value=defaultValue"><br/>
+         <button class="reg_login" id="reg">立即注册</button>
+    </div>
+
+</body>
+
+<script>
+    $("#reg").click(function () {
+       var name = $("#name").val();
+       var pass = $("#pass").val();
+       $.post("/my/register", {"username": name, "password": pass}, function (res) {
+          if (res.response == "ok"){
+              alert("注册成功");
+              location.href = "/my/login";
+          }else{
+              alert(res.message);
+          }
+       })
+    });
+</script>
+
+<style>
+    body{
+        overflow: hidden;
+        background-image: url("/site_media/image/login/login_back.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .main{
+        position: relative;
+        top: 40%;
+        left: 45%;
+    }
+    .main span {
+        color: orangered;
+        font-size: x-large;
+        font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+
+    }
+    .title{
+        margin-left: 100px;
+    }
+    .main input{
+        color:#6a6f77;
+        margin: 20px 10px auto;
+        border-radius:10px;
+        height: 50px;
+        width: 300px;
+        background-color: orange;
+    }
+
+    .btn_login{
+        margin-top: 50px;
+        background-color: blue;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+        border-bottom-color: orange;
+        border-radius: 10px;
+    }
+    .reg_login{
+        margin-left: 30px;
+        margin-top: 50px;
+        background-color: hotpink;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+        border-bottom-color: orange;
+        border-radius: 10px;
+    }
+    .find_pass{
+        margin-left: 30px;
+        margin-top: 50px;
+        background-color: olivedrab;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+        border-bottom-color: orange;
+        border-radius: 10px;
+    }
+
+</style>
+
+</html>

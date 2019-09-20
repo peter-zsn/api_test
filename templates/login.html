@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <script src="/site_media/js/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+     <div class="main">
+         <span class="title">莫名其妙登陆页面</span></br>
+         <span class="login_user">账号：</span>
+         <input value="请输入账号" id="name" onfocus="value=''" onblur="if(!value) value=defaultValue"><br/>
+         <span class="login_pass">密码：</span>
+         <input value="请输入密码" id="pass" onfocus="value=''" onblur="if(!value) value=defaultValue"><br/>
+         <button class="btn_login" id="submit">登陆</button>
+         <button class="reg_login" id="reg">注册</button>
+         <button class="find_pass" id="find_pass">找回密码</button>
+    </div>
+
+</body>
+
+<script>
+    $("#submit").click(function () {
+       var name = $("#name").val();
+       var pass = $("#pass").val();
+       $.post("/my/login", {"username": name, "password": pass}, function (res) {
+          if (res.response == "ok"){
+              alert("登陆成功");
+              location.href = "/my/index"
+          }else{
+              alert(res.message);
+          }
+       })
+    });
+
+    $("#reg").click(function () {
+       location.href = "/my/register"
+    });
+
+    $("#find_pass").click(function () {
+        var name = $("#name").val();
+          $.post("/my/find_pass", {"username": name}, function (res) {
+          if (res.response == "ok"){
+              alert(res.data.pass)
+          }else{
+              alert(res.message);
+          }
+       })
+    });
+</script>
+
+<style>
+    body{
+        overflow: hidden;
+        background-image: url("/site_media/image/login/login_back.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+    .main{
+        position: relative;
+        top: 35%;
+        left: 40%;
+    }
+    .main span {
+        color: orangered;
+        font-size: x-large;
+        font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+
+    }
+    .title{
+        margin-left: 100px;
+    }
+    .main input{
+        color:#6a6f77;
+        margin: 20px 10px auto;
+        border-radius:10px;
+        height: 50px;
+        width: 300px;
+        background-color: orange;
+    }
+
+    .btn_login{
+        margin-top: 50px;
+        background-color: blue;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+        border-bottom-color: orange;
+        border-radius: 10px;
+    }
+    .reg_login{
+        margin-left: 30px;
+        margin-top: 50px;
+        background-color: hotpink;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+        border-bottom-color: orange;
+        border-radius: 10px;
+    }
+    .find_pass{
+        margin-left: 30px;
+        margin-top: 50px;
+        background-color: olivedrab;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+        border-bottom-color: orange;
+        border-radius: 10px;
+    }
+
+</style>
+
+</html>

@@ -42,15 +42,11 @@ ROOT_URLCONF = 'myapi.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-            ],
-        },
+            'environment': 'libs.tags.jj2.Env'
+        }
     },
 ]
 
@@ -81,4 +77,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+
+STATIC_URL = '/media/'
+
+# 静态模板
+STATIC_SITE = os.path.join(BASE_DIR, "media/")
