@@ -1,0 +1,22 @@
+.layui-layer-molv .layui-layer-title{
+    text-align: center;
+    margin: auto;
+    padding: 0!important;
+    font-size: 20px;
+    font-family: Tahoma,Helvetica,Arial,sans-serif;
+    font-weight: bolder;
+}
+
+.layui-layer-dialog .layui-layer-padding{
+    background-color: #fff;
+    font-family: Tahoma,Helvetica,Arial,sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.layui-layer-btn{
+    background-color: #fff;
+    font-family: Tahoma,Helvetica,Arial,sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+}

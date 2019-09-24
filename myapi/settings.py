@@ -19,8 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w%h!l8w2bwi0y$s4dy*m95nxo(drd44@52*e!auq4%81n@9e)t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +35,12 @@ INSTALLED_APPS = [
 MIDDLEWARE_CLASSES = [
     "myapi.middleware.AuthenticationMiddleware"
 ]
+
+SESSION_COOKIE_NAME = 'username'
+SECRET_KEY = '240897'
+SESSION_COOKIE_AGE = 7*24*60*60
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_DOMAIN = None
 
 ROOT_URLCONF = 'myapi.urls'
 

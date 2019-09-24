@@ -1,0 +1,71 @@
+div,form,input,table,p,textrea,body,ul,li,iframe{margin:0px;padding:0px;}
+body,table,div,input,textarea{font: 12px/1.5 Tahoma,Helvetica,Arial,sans-serif;color: #424242;}
+input,textarea{background: #fff;}
+ol,ul,li{list-style:none outside;}
+a{color:#056dae;text-decoration:none;}
+a:hover{color:#000;text-decoration:none;}
+.red{color:#d70101;}
+input{vertical-align:middle;}
+input[type=text],input[type=password],textarea{border: 1px solid #B9CAD3;padding-left: 4px;}
+img{ border:none;}
+.left{float:left;}
+.right{float:right;}
+.clear{clear:both;}
+.center{text-align: center;}
+body{padding:20px;}
+.i_text, .input_text{margin-right:5px;width:150px;height:24px;line-height:24px;border:1px solid #cbcbcb;padding:0 5px;margin-right:10px;vertical-align:middle;}
+.btn_green, .btn, .btn_pri, .bnt{display: inline-block;*zoom: 1;padding:5px 10px;color: #fff;font-size: 12px;font-weight: bold;border-radius:3px;border: none;background: #4198ca;cursor: pointer;margin: 10px 0;}
+.btn_pri{display: inline-block;*zoom: 1;padding:3px 10px;color: #fff;font-size: 12px;font-weight: bold;border-radius:3px;border: none;background: #4198ca;cursor: pointer;margin: 10px 0;}
+.data_tab{clear: both;margin: 3px 0;}
+.data_edit{clear: both;margin: 3px; background-color: #eee;border: 1px solid #ccc;}
+.data_list{clear: both;margin: 3px;}
+.data_operate{clear: both;margin: 3px;}
+/*-----页内tab标签------*/
+
+.tab{height:36px; border-bottom:solid 1px #d0dee5; position:relative; border-left:solid 1px #d3dbde;margin-bottom: 20px;}
+.tab li{float:left;height:37px; line-height:37px; background:url(/site_media/images/itabbg.png) repeat-x; border-right:solid 1px #d3dbde;}
+.tab li a{display: block;font-size:14px; color:#000; padding-left:25px; padding-right:25px;}
+.tab .on{ height:37px; display:block; background:url(/site_media/images/itabbg1.png) repeat-x; font-weight:bold;}
+
+/*-------table 编辑样式-------*/
+.tb_edit{width: 100%;}
+.tb_edit th{font-weight:normal;text-align:right;width:100px;line-height: 24px;}
+.tb_edit th,.tb_edit td{padding:3px;}
+.tb_edit label{margin-right:10px;}
+.tb_edit .i_text{margin-right:5px;width:150px;height:24px;line-height:24px;border:1px solid #C3DAF9;padding:0 5px;margin-right:10px;vertical-align:middle;}
+.tb_edit .i_radio{width:13px;height:13px;margin:0 5px 0 0 ;padding:0;}
+.tb_edit .textarea{margin-right:5px;border:1px solid #C3DAF9;padding:0 5px;margin-right:10px;vertical-align:middle;}
+
+.tb_edit span.error {color: #FF0000;}
+.tb_edit span.notice{color: #FF0000;}
+/*-------------table 列表样式----------*/
+.tb_list{width: 100%;border-spacing: 0;border-collapse: collapse;}
+.tb_list th{border: 1px solid #cbcbcb;height: 25px;line-height: 25px;text-align: center;padding: 5px 2px; background-color: #F0F5F7; color:#333;}
+.tb_list td {padding: 5px;border: 1px solid #cbcbcb;height: 25px;line-height: 25px; padding: 3px 2px;}
+.tb_list .center{text-align: center;}
+
+/*-------------分页-----------*/
+.page_list{height:28px;line-height:28px;color:#395A7D;height:auto;margin:0 auto;overflow:hidden;text-align:center;margin-top:5px;}
+.page_list a:hover, .page_list a.current {color:#0067c6;background: #f5f5f5;}
+.page_list a.current{color: #737373;cursor: default;}
+.page_list a{background:#FFFFFF none repeat scroll 0 0;border:1px solid #cbcbcb;color:#0067c6;font-family:Arial;margin:1px;	padding:3px 7px;text-decoration:none;}
+.btn_vis{display: inline-block;*zoom: 1;padding:5px 10px;color: #000000;font-size: 12px;font-weight: bold;border-radius:3px;border: none;background: #cccccc;cursor: pointer;margin: 10px 0;}
+.btn_click{display: inline-block;*zoom: 1;padding:5px 10px;color: #000000;font-size: 12px;font-weight: bold;border-radius:3px;border: none;background: #cccccc;cursor: pointer;margin: 10px 0;}
+
+.phone_wrap{position: relative;*zoom:1;padding-right: 360px;}
+#phoneWrap{position: absolute;right:0;top:0;height: 561px;width: 350px;background: url(/site_media/images/preview-bg.png) 0 0 no-repeat;}
+#phoneWrap dl{padding:125px 0 0 40px;}
+#phoneWrap dt,#phoneWrap dd{width:180px;color: #fff;word-wrap: break-word;word-break:break-all;line-height: 1.3;}
+#phoneWrap dt{height: 38px;width: 38px;margin-left: 20px;margin-right: 10px;display: inline;border: 1px solid #000;}
+#phoneWrap dd{overflow: hidden;zoom: 1;}
+#phoneWrap .phone_pic{float: left;}
+
+tr.drsj td span{position: relative; top: 12px;}
+tr.batch_account td span{position: relative; top: 12px;}
+
+.managerUser span.wit, .schoolName span.wit{
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    border: 1px solid red;
+}

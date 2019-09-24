@@ -1,0 +1,22 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{*font-size:100%;font-weight:400;}
+
+#leftNav{float: left;width: 186px;padding-right: 1px;}
+#leftNav dt{background-color: #D4E7F0;height: 35px;font-weight: bold;line-height: 35px;cursor: pointer;border-bottom: 1px solid #B9CAD3;}
+#leftNav dd{position: relative;*zoom:1;z-index:1;}
+#leftNav dd a i{position: absolute;right:0;top:10px;height:0;width:0;font-size:0;border-width: 5px;border-style: dashed solid dashed dashed;border-color: transparent #fff transparent transparent;display: none;}
+#leftNav dd a em{float: left;height:0;width:0;margin: 10px 5px 0 20px;font-size:0;border-width: 5px;border-style: dashed dashed dashed solid;border-color: transparent transparent transparent #000;}
+#leftNav dd a{display: block;height: 30px;line-height: 30px;border-left: 2px solid transparent}
+#leftNav dd a.on{background: #3EAFE0;color: #fff;border-color: #EA2020}
+#leftNav dd a.on i{display: block;}
+#leftNav dd a.on em{border-color: transparent transparent transparent #fff;}
+#right{overflow: hidden;}
+.right_position{line-height: 35px;border-bottom: 1px solid #d7e4ea;background-color: #edf6fa;}
+.right_position span{display: inline-block;*display: inline;*zoom: 1;border: 1px solid #ddd;padding: 0 10px;cursor: pointer;}
+.right_position .on{background-color: #fff;color: #222;font-weight: bold;border-top: 2px solid #66C9F3;line-height: 33px;height: 34px;}
+.right_position a,.right_position .on a{color: #66C9F3;margin-left: 5px;font-weight: normal;}
+
+
+#nopower{text-align: center;font-size: 14px;padding: 100px 0;}
+#welcome{text-align: center;font-size: 22px;height: 78px;line-height: 78px;padding: 100px 0;}
+#welcome i{display: inline-block;*zoom: 1;height: 78px;width: 66px;margin: -5px 10px 0 0;background: url(/media/image/index/welcome.png) 0 0 no-repeat;vertical-align: middle;}

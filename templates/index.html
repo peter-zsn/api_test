@@ -1,25 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>首页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Title</title>
+    <script src="/media/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/base.css">
 </head>
 <body>
-<div class="main">
-    <span>恐怖吧！！！ 目前里面什么也没有</span>
+<div style="position: absolute; width: 100%">
+    <div class="head">
+        <p>欢迎来到莫名其妙系统</p>
+        <div class="user_info">
+            <span>账号：{{ request.username }}</span>
+            <span id="changepass">修改密码</span>
+            <span><a href="/my/logout">退出</a></span>
+        </div>
+    </div>
+    <dialog id="dialog">
+        <p>修改密码</p>
+        旧密码：<input id="old_pass"><br>
+        新密码: <input id="new_pass"><br>
+        确认密码: <input id="cure_pass"><br>
+        <button id="sure_pass">确定</button><button id="cancel_pass">取消</button>
+    </dialog>
+    <div class="content">
+        <div id="leftNav">
+            <dl>这个在左边</dl>
+            <dt>左一</dt>
+            <dd>111</dd>
+        </div>
+
+        <div id="right">
+            <div id="frameTitle" class="right_position"><span index="0" class="on"><em>首页</em></span></div>
+            <div id="frameWrap">
+                <iframe id="iframe0" scrolling="auto" width="100%" name="main" src="/my/welcome" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <style>
-    body{
-        overflow: hidden;
-        background: url("/media/image/index/index.png") no-repeat;
-        background-size: cover;
-    }
-    .main{
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,
+fieldset,input,textarea,p,blockquote,th,td {
+    margin:0;
+    padding:0;
+    border: 0;
+}
 
-    }
-    .main span{
-        margin-top: 60%;
-    }
+.head{
+    position: absolute;
+    color: olivedrab;
+    height: 100px;
+    width: 100vw;
+    background: url("/media/image/index/index.png");
+    background-size: cover;
+}
+.head p{
+    margin-top: 40px;
+    margin-left: 40px;
+}
+.user_info{
+    float: right;
+    margin-right: 10%;
+}
+
+.user_info span{
+    margin-right: 20px;
+    color: orangered;
+}
+
+#changepass{
+    margin-left: 20px;
+    color: orangered;
+}
+
+#dialog{
+    background-color: yellow;
+}
+
+#dialog p{
+    color: orangered;
+    text-align: center;
+}
+
+#dialog input{
+    float: right;
+}
+
+#dialog button{
+    margin-left: 50px;
+    color: blue;
+}
+
+.content{
+    margin-top: 100px;
+    width: 100vm;
+}
+
 </style>
+
+<script>
+    $("#changepass").click(function () {
+        $("#dialog").show();
+    });
+    $("#cancel_pass").click(function () {
+       $("#dialog").hide();
+    });
+
+    $("#sure_pass").click(function () {
+       var old_pass = $("#old_pass").val();
+       var new_pass = $("#new_pass").val();
+       var cure_pass = $('#cure_pass').val();
+       if(old_pass == "" || new_pass == "" || cure_pass == ""){
+           alert("请输入完整！")
+           return
+       };
+       if (new_pass != cure_pass){
+           alert("两次密码不一致!");
+           return
+       };
+       $.post("/my/change_pass", {"username": name, "new_pass": new_pass, "old_pass": old_pass}, function (res) {
+          if (res.response == "ok"){
+              alert("修改成功");
+              $("#dialog").hide();
+          }else{
+              alert(res.message);
+          }
+       })
+    });
+
+
+    var iframesLength = 1;
+    $(function($){
+        var frameTitle = $('#frameTitle');
+        var frameWrap = $('#frameWrap');
+        var timeout = null;
+	   //导航栏折叠
+        $('#leftNav dt').toggle(function () {
+            $(this).nextAll().show();
+        },function () {
+            $(this).nextAll().hide();
+        }).nextAll().hide();
+        if ($('#leftNav dt').length === 1) {$('#leftNav dt:eq(0)').trigger('click');};
+        //导航选中
+        $('#leftNav dd a').click(function () {
+            if ($(this).attr('data-target') === 'newtab') {
+                window.open($(this).attr('data-href'));
+                return false;
+            };
+            var text = $(this).text();
+            var handlerIndex = $(this).attr('index');
+            if (typeof handlerIndex != 'undefined') {
+                frameTitle.find('span[index='+handlerIndex+']').trigger('click');
+                frameTitle.find('var[index='+handlerIndex+']').trigger('click');
+            }else{
+                var titleTMP = '<span index="' + iframesLength + '"><em>' + text + '</em><var title="刷新" index="' + iframesLength + '">R</var><a href="javascript:;" title="关闭" index="' + iframesLength + '">X</a></span>';
+                var frameTMP = '<iframe id="iframe'+iframesLength+'" scrolling="no" width="100%" name="iframe'+iframesLength+'" src="'+$(this).attr('data-href')+'" frameborder="0"></iframe>'
+                frameTitle.append(titleTMP);
+                frameWrap.append(frameTMP);
+                $(this).attr('index',iframesLength);
+                frameTitle.find('span[index='+iframesLength+']').trigger('click')
+                iframesLength++;
+            }
+            $('#leftNav dd a').removeClass("on");
+            $(this).addClass("on");
+        });
+        frameTitle.on('click','span',function(e){
+            var index = $(this).attr('index');
+            $(this).addClass('on').siblings().removeClass('on');
+            $('#iframe'+index).show().siblings().hide();
+            makeIframeAuto($('#iframe'+index));
+            e.stopPropagation();
+        })
+        frameTitle.on('click','var',function(e){
+            var index = $(this).attr('index');
+            $('#iframe'+index).attr('src',$('#iframe'+index).attr('src'));
+            e.stopPropagation();
+        })
+        frameTitle.on('click','a',function(e){
+            var index = $(this).attr('index');
+            frameTitle.find('span[index='+index+']').remove();
+            $('#iframe'+index).remove();
+            frameTitle.find('span:last').trigger('click');
+            $('#leftNav dd a[index='+index+']').removeAttr('index');
+            var openwindow = $(this).attr('openwindow');
+            if (typeof openwindow != 'undefined') {
+                var win = $(window.frames[openwindow].document.body)
+                win.find('a[data-target="newtab"][index='+index+']').removeAttr('index');
+            };
+            e.stopPropagation();
+        })
+        //设置iframe高度自适应
+        function makeIframeAuto(iframe){
+            timeout && clearTimeout(timeout);
+            timeout = setInterval(function(){
+                setHeight(iframe);
+            }, 500);
+            function setHeight(obj){
+                var obj = $(obj);
+                var mainheight = obj.contents().find("body").outerHeight()+100;
+                if(mainheight < 300)
+                    mainheight = 300;
+                obj.height(mainheight);
+            }
+        }
+        makeIframeAuto($("#iframe0"));
+    })
+
+</script>
 </html>

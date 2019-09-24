@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{% block title %}{% endblock %}</title>
+<link href="/media/css/right.css" rel="stylesheet" type="text/css" />
+<link href="/media/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<!--引入layer.css  -->
+<link href="/media/css/layer.css" rel="stylesheet" type="text/css"/>
+{% block css %}{% endblock %}
+<script type="text/javascript" src="/media/js/jquery-3.2.1.min.js"></script>
+<script src="/media/js/jquery-ui.js"></script>
+
+<!-- 引入layer.js-->
+<script type="text/javascript" src="/media/js/layer/layer.js"></script>
+{% block plugins %}
+<script type="text/javascript" src="/media/plugins/artDialog/jquery.artDialog.addSkin.js?skin=default"></script>
+<script type='text/javascript' src='/media/plugins/artDialog/plugins/iframeTools.js'></script>
+{% endblock %}
+
+</head>
+<body>
+{% block content %}{% endblock %}
+
+<!-- 页面内的悬框 -->
+<script>
+    $(function($){
+        // 添加公用弹层方法
+        $.fn.showDetail = function(callback){
+            var $target = $(this);
+            var html = '<div id="popmask" style="display: none;"></div>';
+            var styles = '<style>#popmask{background-color: #fff;position: absolute;padding:15px;border: 1px solid #ddd;}</style>'
+            if (!$("#popmask").length){
+                $("body").append(styles+html);
+            }
+            var $mask = $("#popmask");
+            var windowWidth = $(window).width();
+            var windowHeight = $(top.window).height();
+            $(window).on('resize',function(){
+                windowWidth = $(window).width();
+                // 因为iframe高度一直在重置，所以取浏览器高度
+                windowHeight = $(top.window).height();
+            });
+            $target.on('mouseenter',function(e){
+                setMaskPosition(e);
+                if ($.isFunction(callback)) {
+                    callback.call(this);
+                };
+            }).on('mouseout',function(){
+                $mask.hide();
+            }).on('mousemove',function(e){
+                setMaskPosition(e);
+            });
+            function setMaskPosition(e){
+                $mask.show();
+                var scrollTop = top.window === window ? $(document).scrollTop() : $(top.document).scrollTop();
+                var X = e.clientX;
+                var Y = e.clientY;
+                var nWidth = $mask.outerWidth();
+                var nHeight = $mask.outerHeight();
+                if (X > windowWidth/2) {
+                    X = X-nWidth-6;
+                }else{
+                    X += 6;
+                }
+                if (top.window === window) {
+                    if (Y > windowHeight/2) {
+                        Y = Y - nHeight - 6 + scrollTop;
+                    }else{
+                        Y = Y + 6 + scrollTop;
+                    }
+                }else{
+                    scrollTop -= 126;//头部的126像素
+                    if (Y - scrollTop > windowHeight/2) {
+                        Y = Y - nHeight - 6 ;
+                    }else{
+                        Y = Y + 6 ;
+                    }
+                }
+                $mask.css({'left':X+'px',"top":Y+'px'})
+                   // .html("height:"+windowHeight+",width:"+windowWidth+",X:"+X+",Y:"+Y+'scrollTop:'+scrollTop);
+                   // .html(scrollTop)
+            }
+            return this;
+        }
+
+        // 示例：
+        // 哪个页面用到了，初始化就行。参数传进来一个回调方法，用来填充弹层的内容。
+        // $('.aa').showDetail(function(){
+        //        $("#popmask").html($("#id".html()))
+        // })
+    })
+     // 解决AJAX POST提交数据 django csrf
+   $(document).ajaxSend(function(event, xhr, settings) {
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        function sameOrigin(url) {
+            // url could be relative or scheme relative or absolute
+            var host = document.location.host; // host + port
+            var protocol = document.location.protocol;
+            var sr_origin = '//' + host;
+            var origin = protocol + sr_origin;
+            // Allow absolute or scheme relative URLs to same origin
+            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                // or any other URL that isn't scheme relative or absolute i.e relative.
+                !(/^(\/\/|http:|https:).*/.test(url));
+        }
+        function safeMethod(method) {
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+    });
+
+    //页面提示公共方法
+    // type=1 对勾, 2 叉号, 3 问号
+    function WebTips(tip_msg, type) {
+        return layer.alert(tip_msg, {
+            title: '操作提示',
+            skin: 'layui-layer-molv',
+            closeBtn: 0,
+            icon: type,
+            shade: false
+        });
+    }
+</script>
+{% block js %}{% endblock %}
+</body>
+</html>

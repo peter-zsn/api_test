@@ -24,12 +24,12 @@ def json_response(data):
     return r
 
 
-def ajax_ok(data=None, message=""):
+def ajax_ok(request, data=None, message=""):
     res = dict(data=data, message=message, response='ok')
     return json_response(res)
 
 
-def ajax_fail(data=None, message=""):
+def ajax_fail(request, data=None, message=""):
     res = dict(data=data, message=message, response='fail')
     return json_response(res)
 

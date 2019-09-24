@@ -1,13 +1,17 @@
 import traceback
 import logging
 import json
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
 
 from libs.utils import ajax
+from com.com_user import get_user
 
+NO_LOGIN_PATH = ["/my/login", "my/register", "my/find_pass", "my/logout"]
 
 log = logging.getLogger(__name__)
 
+# 添加User属性,保存用户信息
+HttpRequest.username = property(get_user)
 
 class AuthenticationMiddleware(object):
 
@@ -29,6 +33,13 @@ class AuthenticationMiddleware(object):
         except:
             pass
         request.QUERY = query
+        path = request.path
+        print(path)
+        if not path.startswith("/media"):
+            if not request.username:
+                if path not in NO_LOGIN_PATH:
+                    return HttpResponseRedirect("/my/login")
+
         r = self.cross_domain(request)
         if r:
             return r
