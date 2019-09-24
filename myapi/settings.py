@@ -84,5 +84,4 @@ USE_TZ = True
 
 STATIC_URL = '/media/'
 
-# 静态模板
 STATIC_SITE = os.path.join(BASE_DIR, "media/")
