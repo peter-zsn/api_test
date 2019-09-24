@@ -7,7 +7,7 @@ from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
 from libs.utils import ajax
 from com.com_user import get_user
 
-NO_LOGIN_PATH = ["/my/login", "my/register", "my/find_pass", "my/logout"]
+NO_LOGIN_PATH = ["/my/login", "/my/register", "/my/find_pass", "/my/logout"]
 
 log = logging.getLogger(__name__)
 
