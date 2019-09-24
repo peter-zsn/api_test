@@ -1,3 +1,4 @@
+"""coding: utf-8"""
 from django.http import HttpResponseRedirect
 
 from libs.utils.com_redis import rd
