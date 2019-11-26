@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发短信</title>
+</head>
+<body>
+<a id="ios" href="sms:10086&body=短信内容">ios发送短信</a>
+<a id="android" href="sms:10086?body=短信内容">android发送短信</a>
+</body>
+<script>
+    window.onload = function () {
+        var isios = isIos();
+        if (isios == true){
+            document.getElementById("android").style.display = "None"
+        }else{
+            document.getElementById("ios").style.display = "None"
+        }
+    };
+
+
+// 判断安卓
+function isAndroid() {
+    var u = navigator.userAgent;
+    if (u.indexOf("Android") > -1 || u.indexOf("Linux") > -1) {
+        if (window.ShowFitness !== undefined) return true;
+    }
+    return false;
+}
+// 判断设备为 ios
+function isIos() {
+    var u = navigator.userAgent;
+    if (u.indexOf("iPhone") > -1 || u.indexOf("iOS") > -1) {
+        return true;
+    }
+    return false;
+}
+
+
+</script>
+</html>

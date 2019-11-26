@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^change_pass$', views.change_pass),              # 修改密码
     url(r'^welcome$', views.welcome),              # 欢迎页面
     url(r'^logout$', views.logout),              # 退出
+    url(r"movie/", include("apps.movies.urls"))      # 电影相关
 ]

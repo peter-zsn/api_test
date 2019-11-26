@@ -7,7 +7,7 @@ from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
 from libs.utils import ajax
 from com.com_user import get_user
 
-NO_LOGIN_PATH = ["/my/login", "/my/register", "/my/find_pass", "/my/logout"]
+NO_LOGIN_PATH = ["/my/login", "/my/register", "/my/find_pass", "/my/logout", "/my/movie/"]
 
 log = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ class AuthenticationMiddleware(object):
         request.QUERY = query
         path = request.path
         print(path)
-        if not path.startswith("/media"):
+        if not path.startswith("/media") and not path.startswith("/my/movie/"):
             if not request.username:
                 if path not in NO_LOGIN_PATH:
                     return HttpResponseRedirect("/my/login")
